@@ -72,7 +72,7 @@
   /* ───── HERO (foto background) ───── */
   .hero {
     /* ↓ Ganti dengan path foto tampak depan kost kamu */
-    background-image: url('/hero.jpeg');
+    background-image: url('hero.jpeg');
     background-size: cover;
     background-position: center;
     min-height: 100vh;

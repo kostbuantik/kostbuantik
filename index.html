@@ -1,421 +1,474 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kost Putri Bu Antik</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css">
-<link rel="icon" type="image/png" href="/assets/logo.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kost Putri Bu Antik</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="icon" type="image/png" href="/assets/logo.png">
 </head>
+
 <body>
 
-<!-- ═══ NAVBAR ═══ -->
-<nav class="navbar">
-  <a class="navbar-brand">🌸 Kost Putri <span>Bu Antik</span></a>
-  <div class="navbar-actions">
-    <!-- Ganti href dengan link WhatsApp: https://wa.me/628xxxxxxxxxx -->
-    <a href="//wa.me/6285226858923?text=Permisi,%20apakah%20masih%20ada%20kamar%20kosong?" target="_blank" class="navbar-btn btn-kontak">
-      📞 <span class="label">Hubungi Kami</span>
-    </a>
-    <!-- Ganti href dengan link Google Maps kost kamu -->
-    <a href="https://maps.app.goo.gl/g9UNviDF4urhpuN19" target="_blank" class="navbar-btn btn-maps">
-      🗺️ <span class="label">Google Maps</span>
-    </a>
-  </div>
-</nav>
-
-<!-- ═══ HERO ═══
-     Cara ganti foto: di CSS cari .hero { background-image: url('...') }
-     ganti URL dengan path foto kost kamu, misal: url('foto/depan.jpg')
--->
-<div class="hero">
-  <h1>Kost Putri <span>Bu Antik</span></h1>
-  <p class="hero-sub">Hunian nyaman, aman, dan homey untuk perempuan mandiri.</p>
-  <div class="nav-buttons">
-    <a href="#fasilitas" class="nav-btn btn-fasilitas"><span class="btn-icon">🛋️</span> Fasilitas</a>
-    <a href="#jarak" class="nav-btn btn-jarak"><span class="btn-icon">📍</span> Jarak Lokasi</a>
-    <a href="#harga" class="nav-btn btn-harga"><span class="btn-icon">🏷️</span> Harga & Kamar</a>
-  </div>
-</div>
-
-<!-- ═══ GALERI FOTO ═══
-     Ganti src="assets/foto-X.jpg" dengan path foto kost kamu.
-     3 foto pertama tampil di halaman, semua 8 foto ada di modal lightbox.
--->
-<div class="galeri-wrapper" id="galeri">
-  <div class="galeri-grid">
-
-    <!-- Foto utama (besar kiri) -->
-    <div class="g-main" onclick="openLightbox(0)">
-      <img src="assets/hero.jpeg" alt="Foto kost 1">
+  <div class="warn-overlay" id="warn-overlay" onclick="closeWarnOnOverlay(event)">
+    <button class="warn-close" id="warn-close" onclick="closeWarn()" aria-label="Tutup pesan">✕</button>
+    <div class="warn-box" id="warn-box">
+      <div class="warn-icon">⚠️</div>
+      <h2 class="warn-title">Pemberitahuan Penting</h2>
+      <p class="warn-msg">
+        Kost Bu Antik tidak pernah memiliki nomor selain
+        <strong>+62 852-2685-8923</strong>
+      </p>
+      <p class="warn-msg">Harap tidak melakukan transaksi selain dengan nomor tersebut.</p>
+      <p class="warn-thanks">Terimakasih 🙏</p>
     </div>
+  </div>
 
-    <!-- Foto kanan atas -->
-    <div class="g-side" onclick="openLightbox(1)">
-      <img src="assets/parkir.jpg" alt="Foto kost 2">
+  <nav class="navbar">
+    <a class="navbar-brand">🌸 Kost Putri <span>Bu Antik</span></a>
+    <div class="navbar-actions">
+      <a href="//wa.me/6285226858923?text=Permisi,%20apakah%20masih%20ada%20kamar%20kosong?" target="_blank"
+        class="navbar-btn btn-kontak">
+        📞 <span class="label">Hubungi Kami</span>
+      </a>
+      <a href="https://maps.app.goo.gl/g9UNviDF4urhpuN19" target="_blank" class="navbar-btn btn-maps">
+        🗺️ <span class="label">Google Maps</span>
+      </a>
     </div>
+  </nav>
 
-    <!-- Foto kanan bawah + tombol "Lihat semua foto" -->
-    <div class="g-side" onclick="openLightbox(2)" style="position:relative;">
-      <img src="assets/depan.jpeg" alt="Foto kost 3">
-      <button class="galeri-btn" onclick="event.stopPropagation(); openLightbox(0)">
-        🖼️ Lihat foto
-      </button>
+  <div class="hero">
+    <h1>Kost Putri <span>Bu Antik</span></h1>
+    <p class="hero-sub">Hunian nyaman, aman, dan homey untuk perempuan mandiri.</p>
+    <div class="nav-buttons">
+      <a href="#fasilitas" class="nav-btn btn-fasilitas"><span class="btn-icon">🛋️</span> Fasilitas</a>
+      <a href="#jarak" class="nav-btn btn-jarak"><span class="btn-icon">📍</span> Jarak Lokasi</a>
+      <a href="#harga" class="nav-btn btn-harga"><span class="btn-icon">🏷️</span> Harga & Kamar</a>
     </div>
-
   </div>
-</div>
 
-<!-- ═══ LIGHTBOX MODAL ═══ -->
-<div class="lb-overlay" id="lb-overlay" onclick="closeLightboxOnOverlay(event)">
-  <button class="lb-close" onclick="closeLightbox()">✕</button>
-  <div class="lb-main">
-    <img class="lb-img" id="lb-img" src="" alt="Foto kost">
-  </div>
-  
-  <div class="lb-footer-nav" style="display: flex; align-items: center; gap: 20px; margin-top: 15px;">
-    <button class="lb-arrow-down" onclick="changePhoto(-1)">❮</button>
-    <div class="lb-caption" id="lb-caption" style="margin-top: 0;"></div>
-    <button class="lb-arrow-down" onclick="changePhoto(1)">❯</button>
-  </div>
-  
-  <div class="lb-thumbs" id="lb-thumbs"></div>
-</div>
+  <div class="galeri-wrapper" id="galeri">
+    <div class="galeri-grid">
 
-<script>
-  const allPhotos = [
-    { src: 'assets/hero.jpeg', caption: 'Area depan' },
-    { src: 'assets/parkir.jpg', caption: 'Area depan' },
-    { src: 'assets/depan.jpeg', caption: 'Area depan' },
-    { src: 'assets/fitur 11.jpeg', caption: 'Kamar single' },
-    { src: 'assets/fitur 22.jpeg', caption: 'Kamar double' },
-    { src: 'assets/kipas.jpeg', caption: 'Dalam kamar' },
-    { src: 'assets/kipasblkng.jpg', caption: 'Dalam kamar' },
-    { src: 'assets/wc.jpeg', caption: 'Kamar mandi' },
-  ];
-
-  let currentIdx = 0;
-
-  function buildThumbs() {
-    const container = document.getElementById('lb-thumbs');
-    container.innerHTML = '';
-    allPhotos.forEach((p, i) => {
-      const t = document.createElement('img');
-      t.className = 'lb-thumb';
-      t.src = p.src;
-      t.alt = p.caption;
-      t.onerror = () => { t.src = p.fallback; };
-      t.onclick = () => goToPhoto(i);
-      container.appendChild(t);
-    });
-  }
-
-  function goToPhoto(idx) {
-    currentIdx = (idx + allPhotos.length) % allPhotos.length;
-    const p = allPhotos[currentIdx];
-    const img = document.getElementById('lb-img');
-    img.src = p.src;
-    img.onerror = () => { img.src = p.fallback; };
-    document.getElementById('lb-caption').textContent =
-      (currentIdx + 1) + ' / ' + allPhotos.length + '  —  ' + p.caption;
-    document.querySelectorAll('.lb-thumb').forEach((t, i) => t.classList.toggle('active', i === currentIdx));
-    const active = document.getElementById('lb-thumbs').children[currentIdx];
-    if (active) active.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-  }
-
-  function openLightbox(idx) {
-    buildThumbs();
-    document.getElementById('lb-overlay').classList.add('active');
-    document.body.style.overflow = 'hidden';
-    goToPhoto(idx);
-  }
-
-  function closeLightbox() {
-    document.getElementById('lb-overlay').classList.remove('active');
-    document.body.style.overflow = '';
-  }
-
-  function closeLightboxOnOverlay(e) {
-    if (e.target === document.getElementById('lb-overlay')) closeLightbox();
-  }
-
-  function changePhoto(dir) { goToPhoto(currentIdx + dir); }
-
-  document.addEventListener('keydown', e => {
-    if (!document.getElementById('lb-overlay').classList.contains('active')) return;
-    if (e.key === 'ArrowLeft') changePhoto(-1);
-    if (e.key === 'ArrowRight') changePhoto(1);
-    if (e.key === 'Escape') closeLightbox();
-  });
-
-  // fungsi scroll lightbox
-let touchstartX = 0;
-let touchendX = 0;
-
-const overlay = document.getElementById('lb-overlay');
-
-overlay.addEventListener('touchstart', e => {
-    touchstartX = e.changedTouches[0].screenX;
-}, false);
-
-overlay.addEventListener('touchend', e => {
-    touchendX = e.changedTouches[0].screenX;
-    handleGesture();
-}, false);
-
-function handleGesture() {
-    // Jika geser ke kiri (Next)
-    if (touchstartX - touchendX > 50) {
-        changePhoto(1);
-    }
-    // Jika geser ke kanan (Prev)
-    if (touchendX - touchstartX > 50) {
-        changePhoto(-1);
-    }
-}
-
-</script>
-
-<!-- ═══ FASILITAS ═══ -->
-<section id="fasilitas">
-  <div class="section-title">Fasilitas Lengkap</div>
-  <div class="section-sub">Semua yang kamu butuhkan sudah tersedia</div>
-  <div class="fasilitas-grid">
-    <div class="fasilitas-card"><span class="fasilitas-icon">📶</span><div class="fasilitas-name">WiFi Cepat Hingga 35Mbps</div></div>
-    <div class="fasilitas-card"><span class="fasilitas-icon">🌀</span><div class="fasilitas-name">Kipas Angin di Setiap Kamar</div></div>
-    <div class="fasilitas-card"><span class="fasilitas-icon">🚿</span><div class="fasilitas-name">Kamar Mandi Dalam</div></div>
-    <div class="fasilitas-card"><span class="fasilitas-icon">🧺</span><div class="fasilitas-name">Pengering Pakaian</div></div>
-    <div class="fasilitas-card"><span class="fasilitas-icon">🅿️</span><div class="fasilitas-name">Parkir Motor</div></div>
-    <div class="fasilitas-card"><span class="fasilitas-icon">🔒</span><div class="fasilitas-name">CCTV 24 Jam</div></div>
-    <div class="fasilitas-card"><span class="fasilitas-icon">🍳</span><div class="fasilitas-name">Dapur Bersama</div></div>
-    <div class="fasilitas-card"><span class="fasilitas-icon">🗄️</span><div class="fasilitas-name">Lemari</div></div>
-    <div class="fasilitas-card"><span class="fasilitas-icon">🛌🏻</span><div class="fasilitas-name">Kasur, dan Bantal</div></div>
-    <div class="fasilitas-card"><span class="fasilitas-icon">❄️</span><div class="fasilitas-name">Kulkas Bersama</div></div>
-    <div class="fasilitas-card"><span class="fasilitas-icon">🪑</span><div class="fasilitas-name">Meja dan Kursi</div></div>
-    <div class="fasilitas-card"><span class="fasilitas-icon">🪞</span><div class="fasilitas-name">Cermin Full Body</div></div>
-    
-  </div>
-</section>
-
-<!-- ═══ JARAK ═══ -->
-<section id="jarak">
-  <div class="section-title">Jarak ke Lokasi Strategis</div>
-  <div class="section-sub">Dekat dengan pusat aktivitas sehari-hari</div>
-  <div class="jarak-list">
-
-  <a href="https://maps.app.goo.gl/24abetmLH51wcCNA6?g_st=atm" target="_blank" class="jarak-item-link">
-  <div class="jarak-item">
-    <div class="jarak-icon">🏭</div>
-      <div>
-          <div class="jarak-name">PT. Selalu Cinta Indonesia</div>
-          <div class="jarak-dist" id="dist-sci">1,5 km 4 mnt</div>
-      </div>
-    <div class="jarak-km">Cek Rute</div>
-  </div>
-  </a>
-
-  <a href="https://maps.app.goo.gl/vvjvFc6HexYfNiuv8?g_st=atm" target="_blank" class="jarak-item-link">
-  <div class="jarak-item">
-    <div class="jarak-icon">🏥</div>
-      <div>
-          <div class="jarak-name">RS Paru Dr. Ario Wirawan</div>
-          <div class="jarak-dist" id="dist-rs-paru">2 km 5 mnt</div>
-      </div>
-    <div class="jarak-km">Cek Rute</div>
-  </div>
-  </a>
-
-  <a href="https://maps.app.goo.gl/EiVxeSkAVMNi1ENg8?g_st=atm" target="_blank" class="jarak-item-link">
-  <div class="jarak-item">
-    <div class="jarak-icon">🚌</div>
-      <div>
-          <div class="jarak-name">Terminal Tingkir</div>
-          <div class="jarak-dist" id="dist-terminal">3,2 km 6 mnt</div>
-      </div>
-    <div class="jarak-km">Cek Rute</div>
-  </div>
-  </a>
-
-  <a href="https://maps.app.goo.gl/vbmAfNhNXf1ZYXoo9?g_st=atm" target="_blank" class="jarak-item-link">
-  <div class="jarak-item">
-    <div class="jarak-icon">🛒</div>
-      <div>
-          <div class="jarak-name">Luwes Swayalan</div>
-          <div class="jarak-dist" id="dist-luwes">4,3 km - 10 mnt</div>
-      </div>
-    <div class="jarak-km">Cek Rute</div>
-  </div>
-  </a>
-
-  <a href="https://maps.app.goo.gl/7xQEZKPthKSmimda7" target="_blank" class="jarak-item-link">
-  <div class="jarak-item">
-    <div class="jarak-icon">🛣️</div>
-      <div>
-          <div class="jarak-name">Gerbang Tol Salatiga</div>
-          <div class="jarak-dist" id="dist-tol">5,5 km 11 mnt</div>
-      </div>
-    <div class="jarak-km">Cek Rute</div>
-  </div>
-  </a>
-
-  <a href="https://maps.app.goo.gl/9u6AdsiCE8cAvcdLA" target="_blank" class="jarak-item-link">
-  <div class="jarak-item">
-    <div class="jarak-icon">🏫</div>
-      <div>
-          <div class="jarak-name">UIN Kampus 3</div>
-          <div class="jarak-dist" id="dist-uin">7,4 km 11 mnt</div>
-      </div>
-    <div class="jarak-km">Cek Rute</div>
-  </div>
-  </a>
-  </div>
-</section>
-
-<!-- ═══ HARGA ═══ -->
-<section id="harga">
-  <div class="section-title">Harga & Jenis Kamar</div>
-  <div class="section-sub">Pilih kamar sesuai kebutuhanmu</div>
-  <div class="harga-grid">
-
-    <!-- STANDARD — ganti src dengan foto kamar standard kamu -->
-    <div class="harga-card">
-      <img class="harga-img"
-        src="assets/fitur1.jpeg"
-        alt="Kamar Standard"
-        onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-      <div class="harga-img-placeholder" style="display:none;">🛏️</div>
-      <div class="harga-body">
-        <div class="harga-type">Kamar Standard</div>
-        <!-- <div class="harga-desc">Cocok untuk mahasiswi</div> -->
-        <div class="harga-price">Rp 500.000</div>
-        <div class="harga-period">/ bulan</div>
-        <ul class="harga-features">
-          <li>Kasur Single</li>
-          <li>Lemari Plastik</li>
-          <li>Kamar mandi dalam</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- DELUXE — ganti src dengan foto kamar deluxe kamu -->
-    <div class="harga-card">
-      <img class="harga-img"
-        src="assets/fitur2.jpeg"
-        alt="Kamar Deluxe"
-        onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-      <div class="harga-img-placeholder" style="display:none;">🛏️</div>
-      <div class="harga-body">
-        <div class="harga-type">Kamar Double</div>
-        <!-- <div class="harga-desc">Paling diminati penghuni</div> -->
-        <div class="harga-price">Rp 750.000</div>
-        <div class="harga-period">/ bulan</div>
-        <ul class="harga-features">
-          <li>Kasur Double</li>
-          <li>2 Lemari Plastik</li>
-          <li>Kamar mandi dalam</li>
-        </ul>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ═══ GOOGLE REVIEWS ═══ -->
-<div class="reviews-section">
-  <div class="reviews-inner">
-    <div class="reviews-header">
-      <div class="google-logo">⭐ Ulasan dari Google Maps</div>
-      <div class="section-title">Kata Mereka tentang Kost Bu Antik</div>
-      <div class="section-sub">Pengalaman nyata dari penghuni kami</div>
-    </div>
-    <div class="reviews-grid">
-
-      <div class="review-card">
-        <div class="review-header">
-          <div class="review-avatar">DM</div>
-          <div><div class="review-name">D**** M******</div></div>
-        </div>
-        <div class="review-stars">★★★★★</div>
-        <div class="review-text">"Kosnya bagus bangettt nyaman bersih,ibuk bapak kosnya superrr baik,fasilitas lengkap ada dapur bersama ada kulkasss ,,murah juga🙌 …"</div>
+      <div class="g-main" onclick="openLightbox(0)">
+        <img src="assets/hero.jpeg" alt="Foto kost 1">
       </div>
 
-      <div class="review-card">
-        <div class="review-header">
-          <div class="review-avatar">DA</div>
-          <div><div class="review-name">D** A********</div></div>
-        </div>
-        <div class="review-stars">★★★★★</div>
-        <div class="review-text">"kost yang sangat bersih, nyaman, fasilitasnya lengkap, berfungsi semua dengan baik, aman, tempat nya juga sejuk. ibu kost dan bapak kost sangat baik. recommended banget buat yang mau nyari kost di daerah salatiga"</div>
+      <div class="g-side" onclick="openLightbox(1)">
+        <img src="assets/parkir.jpg" alt="Foto kost 2">
       </div>
 
-      <div class="review-card">
-        <div class="review-header">
-          <div class="review-avatar">LK</div>
-          <div><div class="review-name">L**** K*****</div></div>
-        </div>
-        <div class="review-stars">★★★★★</div>
-        <div class="review-text">"Salah satu kost yang bener bener bikin aku nyaman. Tempatnya bersih, tenang, dan terawat dengan sangat baik. Fasilitasnya lengkap dan semuanya berfungsi dengan baik. Suasananya sejuk ga pengap pokonya enakk bgt buat tinggal."</div>
-      </div>
-
-      <div class="review-card">
-        <div class="review-header">
-          <div class="review-avatar">DM</div>
-          <div><div class="review-name">D**** M******</div></div>
-        </div>
-        <div class="review-stars">★★★★★</div>
-        <div class="review-text">"Kost nya sangat nyaman dan sejuk, bersih, air nya bersih dan segar dengan fasilitas yang lengkap mulai dari dapur bersama, pengering pakaian jadi ga perlu khawatir baju susah kering, tempat jemur baju yang luas tersedia juga disetiap depan kamar nya, ada kulkas juga, parkiran motor cukup luas, bonus nya bapak ibu kos yang super baikk seperti keluarga sendiri..☺️"</div>
-      </div>
-
-      <div class="review-card">
-        <div class="review-header">
-          <div class="review-avatar">NP</div>
-          <div><div class="review-name">N****** P****</div></div>
-        </div>
-        <div class="review-stars">★★★★★</div>
-        <div class="review-text">"Kost buntik sangat bersihh dan nyamannnnn, ada kulkas, mesin cuci pengering, dapur bersama, kamar mandi dalam dan yang penting bersihhh... ibu kost dan bapak kost sangat baikk... ramahh dan pengertian💜"</div>
-      </div>
-
-      <div class="review-card">
-        <div class="review-header">
-          <div class="review-avatar">M</div>
-          <div><div class="review-name">M*****</div></div>
-        </div>
-        <div class="review-stars">★★★★★</div>
-        <div class="review-text">"Kosnya nyaman, fasilitas lengkap ada kulkas, dapur sama mesin cuci bersama, yg punya baik bnget royal lagi, klo ada komplainan responnya cepet 👍👍👍"</div>
+      <div class="g-side" onclick="openLightbox(2)" style="position:relative;">
+        <img src="assets/depan.jpeg" alt="Foto kost 3">
+        <button class="galeri-btn" onclick="event.stopPropagation(); openLightbox(0)">
+          🖼️ Lihat foto
+        </button>
       </div>
 
     </div>
   </div>
-</div>
 
-<!-- ═══ FOOTER ═══ -->
-<footer>
-  <strong>Kost Putri Bu Antik</strong>
-  Kumpulrejo, Kec. Argomulyo, Kota Salatiga, Jawa Tengah — Hubungi: 0852-2685-8923
-  <br><br>
-  <span style="font-size: 12px; opacity: 0.5;">© 2024-2026 Kost Putri Bu Antik. All rights reserved.</span>
-</footer>
+  <div class="lb-overlay" id="lb-overlay" onclick="closeLightboxOnOverlay(event)">
+    <button class="lb-close" onclick="closeLightbox()">✕</button>
+    <div class="lb-main">
+      <img class="lb-img" id="lb-img" src="" alt="Foto kost">
+    </div>
 
-<script>
-  // --- LOAD DYNAMIC DISTANCES ---
-  async function loadDynamicDistances() {
-    try {
-      const res = await fetch('/api/locations');
-      if (!res.ok) return;
-      const data = await res.json();
-      data.forEach(loc => {
-        const el = document.getElementById('dist-' + loc.id);
-        if (el) {
-          el.textContent = `${loc.distance} ${loc.time}`;
-        }
+    <div class="lb-footer-nav" style="display: flex; align-items: center; gap: 20px; margin-top: 15px;">
+      <button class="lb-arrow-down" onclick="changePhoto(-1)">❮</button>
+      <div class="lb-caption" id="lb-caption" style="margin-top: 0;"></div>
+      <button class="lb-arrow-down" onclick="changePhoto(1)">❯</button>
+    </div>
+
+    <div class="lb-thumbs" id="lb-thumbs"></div>
+  </div>
+
+  <script>
+    const allPhotos = [
+      { src: 'assets/hero.jpeg', caption: 'Area depan' },
+      { src: 'assets/parkir.jpg', caption: 'Area depan' },
+      { src: 'assets/depan.jpeg', caption: 'Area depan' },
+      { src: 'assets/fitur 11.jpeg', caption: 'Kamar single' },
+      { src: 'assets/fitur 22.jpeg', caption: 'Kamar double' },
+      { src: 'assets/kipas.jpeg', caption: 'Dalam kamar' },
+      { src: 'assets/kipasblkng.jpg', caption: 'Dalam kamar' },
+      { src: 'assets/wc.jpeg', caption: 'Kamar mandi' },
+    ];
+
+    let currentIdx = 0;
+
+    function buildThumbs() {
+      const container = document.getElementById('lb-thumbs');
+      container.innerHTML = '';
+      allPhotos.forEach((p, i) => {
+        const t = document.createElement('img');
+        t.className = 'lb-thumb';
+        t.src = p.src;
+        t.alt = p.caption;
+        t.onerror = () => { t.src = p.fallback; };
+        t.onclick = () => goToPhoto(i);
+        container.appendChild(t);
       });
-    } catch (e) {
-      console.warn('Gagal memuat jarak dinamis dari server, menggunakan data fallback.', e);
     }
-  }
-  document.addEventListener('DOMContentLoaded', loadDynamicDistances);
-</script>
+
+    function goToPhoto(idx) {
+      currentIdx = (idx + allPhotos.length) % allPhotos.length;
+      const p = allPhotos[currentIdx];
+      const img = document.getElementById('lb-img');
+      img.src = p.src;
+      img.onerror = () => { img.src = p.fallback; };
+      document.getElementById('lb-caption').textContent =
+        (currentIdx + 1) + ' / ' + allPhotos.length + '  —  ' + p.caption;
+      document.querySelectorAll('.lb-thumb').forEach((t, i) => t.classList.toggle('active', i === currentIdx));
+      const active = document.getElementById('lb-thumbs').children[currentIdx];
+      if (active) active.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
+
+    function openLightbox(idx) {
+      buildThumbs();
+      document.getElementById('lb-overlay').classList.add('active');
+      document.body.style.overflow = 'hidden';
+      goToPhoto(idx);
+    }
+
+    function closeLightbox() {
+      document.getElementById('lb-overlay').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function closeLightboxOnOverlay(e) {
+      if (e.target === document.getElementById('lb-overlay')) closeLightbox();
+    }
+
+    function changePhoto(dir) { goToPhoto(currentIdx + dir); }
+
+    document.addEventListener('keydown', e => {
+      if (!document.getElementById('lb-overlay').classList.contains('active')) return;
+      if (e.key === 'ArrowLeft') changePhoto(-1);
+      if (e.key === 'ArrowRight') changePhoto(1);
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    let touchstartX = 0;
+    let touchendX = 0;
+
+    const overlay = document.getElementById('lb-overlay');
+
+    overlay.addEventListener('touchstart', e => {
+      touchstartX = e.changedTouches[0].screenX;
+    }, false);
+
+    overlay.addEventListener('touchend', e => {
+      touchendX = e.changedTouches[0].screenX;
+      handleGesture();
+    }, false);
+
+    function handleGesture() {
+      if (touchstartX - touchendX > 50) {
+        changePhoto(1);
+      }
+      if (touchendX - touchstartX > 50) {
+        changePhoto(-1);
+      }
+    }
+
+  </script>
+
+  <section id="fasilitas">
+    <div class="section-title">Fasilitas Lengkap</div>
+    <div class="section-sub">Semua yang kamu butuhkan sudah tersedia</div>
+    <div class="fasilitas-grid">
+      <div class="fasilitas-card"><span class="fasilitas-icon">📶</span>
+        <div class="fasilitas-name">WiFi Cepat Hingga 35Mbps</div>
+      </div>
+      <div class="fasilitas-card"><span class="fasilitas-icon">🌀</span>
+        <div class="fasilitas-name">Kipas Angin di Setiap Kamar</div>
+      </div>
+      <div class="fasilitas-card"><span class="fasilitas-icon">🚿</span>
+        <div class="fasilitas-name">Kamar Mandi Dalam</div>
+      </div>
+      <div class="fasilitas-card"><span class="fasilitas-icon">🧺</span>
+        <div class="fasilitas-name">Pengering Pakaian</div>
+      </div>
+      <div class="fasilitas-card"><span class="fasilitas-icon">🅿️</span>
+        <div class="fasilitas-name">Parkir Motor</div>
+      </div>
+      <div class="fasilitas-card"><span class="fasilitas-icon">🔒</span>
+        <div class="fasilitas-name">CCTV 24 Jam</div>
+      </div>
+      <div class="fasilitas-card"><span class="fasilitas-icon">🍳</span>
+        <div class="fasilitas-name">Dapur Bersama</div>
+      </div>
+      <div class="fasilitas-card"><span class="fasilitas-icon">🗄️</span>
+        <div class="fasilitas-name">Lemari</div>
+      </div>
+      <div class="fasilitas-card"><span class="fasilitas-icon">🛌🏻</span>
+        <div class="fasilitas-name">Kasur, dan Bantal</div>
+      </div>
+      <div class="fasilitas-card"><span class="fasilitas-icon">❄️</span>
+        <div class="fasilitas-name">Kulkas Bersama</div>
+      </div>
+      <div class="fasilitas-card"><span class="fasilitas-icon">🪑</span>
+        <div class="fasilitas-name">Meja dan Kursi</div>
+      </div>
+      <div class="fasilitas-card"><span class="fasilitas-icon">🪞</span>
+        <div class="fasilitas-name">Cermin Full Body</div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="jarak">
+    <div class="section-title">Jarak ke Lokasi Strategis</div>
+    <div class="section-sub">Dekat dengan pusat aktivitas sehari-hari</div>
+    <div class="jarak-list">
+
+      <a href="https://maps.app.goo.gl/24abetmLH51wcCNA6?g_st=atm" target="_blank" class="jarak-item-link">
+        <div class="jarak-item">
+          <div class="jarak-icon">🏭</div>
+          <div>
+            <div class="jarak-name">PT. Selalu Cinta Indonesia</div>
+            <div class="jarak-dist" id="dist-sci">1,5 km 4 mnt</div>
+          </div>
+          <div class="jarak-km">Cek Rute</div>
+        </div>
+      </a>
+
+      <a href="https://maps.app.goo.gl/vvjvFc6HexYfNiuv8?g_st=atm" target="_blank" class="jarak-item-link">
+        <div class="jarak-item">
+          <div class="jarak-icon">🏥</div>
+          <div>
+            <div class="jarak-name">RS Paru Dr. Ario Wirawan</div>
+            <div class="jarak-dist" id="dist-rs-paru">2 km 5 mnt</div>
+          </div>
+          <div class="jarak-km">Cek Rute</div>
+        </div>
+      </a>
+
+      <a href="https://maps.app.goo.gl/EiVxeSkAVMNi1ENg8?g_st=atm" target="_blank" class="jarak-item-link">
+        <div class="jarak-item">
+          <div class="jarak-icon">🚌</div>
+          <div>
+            <div class="jarak-name">Terminal Tingkir</div>
+            <div class="jarak-dist" id="dist-terminal">3,2 km 6 mnt</div>
+          </div>
+          <div class="jarak-km">Cek Rute</div>
+        </div>
+      </a>
+
+      <a href="https://maps.app.goo.gl/vbmAfNhNXf1ZYXoo9?g_st=atm" target="_blank" class="jarak-item-link">
+        <div class="jarak-item">
+          <div class="jarak-icon">🛒</div>
+          <div>
+            <div class="jarak-name">Luwes Swayalan</div>
+            <div class="jarak-dist" id="dist-luwes">4,3 km - 10 mnt</div>
+          </div>
+          <div class="jarak-km">Cek Rute</div>
+        </div>
+      </a>
+
+      <a href="https://maps.app.goo.gl/7xQEZKPthKSmimda7" target="_blank" class="jarak-item-link">
+        <div class="jarak-item">
+          <div class="jarak-icon">🛣️</div>
+          <div>
+            <div class="jarak-name">Gerbang Tol Salatiga</div>
+            <div class="jarak-dist" id="dist-tol">5,5 km 11 mnt</div>
+          </div>
+          <div class="jarak-km">Cek Rute</div>
+        </div>
+      </a>
+
+      <a href="https://maps.app.goo.gl/9u6AdsiCE8cAvcdLA" target="_blank" class="jarak-item-link">
+        <div class="jarak-item">
+          <div class="jarak-icon">🏫</div>
+          <div>
+            <div class="jarak-name">UIN Kampus 3</div>
+            <div class="jarak-dist" id="dist-uin">7,4 km 11 mnt</div>
+          </div>
+          <div class="jarak-km">Cek Rute</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section id="harga">
+    <div class="section-title">Harga & Jenis Kamar</div>
+    <div class="section-sub">Pilih kamar sesuai kebutuhanmu</div>
+    <div class="harga-grid">
+
+      <div class="harga-card">
+        <img class="harga-img" src="assets/fitur1.jpeg" alt="Kamar Standard"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="harga-img-placeholder" style="display:none;">🛏️</div>
+        <div class="harga-body">
+          <div class="harga-type">Kamar Standard</div>
+          <div class="harga-price">Rp 500.000</div>
+          <div class="harga-period">/ bulan</div>
+          <ul class="harga-features">
+            <li>Kasur Single</li>
+            <li>Lemari Plastik</li>
+            <li>Kamar mandi dalam</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="harga-card">
+        <img class="harga-img" src="assets/fitur2.jpeg" alt="Kamar Deluxe"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="harga-img-placeholder" style="display:none;">🛏️</div>
+        <div class="harga-body">
+          <div class="harga-type">Kamar Double</div>
+          <div class="harga-price">Rp 750.000</div>
+          <div class="harga-period">/ bulan</div>
+          <ul class="harga-features">
+            <li>Kasur Double</li>
+            <li>2 Lemari Plastik</li>
+            <li>Kamar mandi dalam</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="reviews-section">
+    <div class="reviews-inner">
+      <div class="reviews-header">
+        <div class="google-logo">⭐ Ulasan dari Google Maps</div>
+        <div class="section-title">Kata Mereka tentang Kost Bu Antik</div>
+        <div class="section-sub">Pengalaman nyata dari penghuni kami</div>
+      </div>
+      <div class="reviews-grid">
+
+        <div class="review-card">
+          <div class="review-header">
+            <div class="review-avatar">DM</div>
+            <div>
+              <div class="review-name">D**** M******</div>
+            </div>
+          </div>
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">"Kosnya bagus bangettt nyaman bersih,ibuk bapak kosnya superrr baik,fasilitas lengkap
+            ada dapur bersama ada kulkasss ,,murah juga🙌 …"</div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-header">
+            <div class="review-avatar">DA</div>
+            <div>
+              <div class="review-name">D** A********</div>
+            </div>
+          </div>
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">"kost yang sangat bersih, nyaman, fasilitasnya lengkap, berfungsi semua dengan baik,
+            aman, tempat nya juga sejuk. ibu kost dan bapak kost sangat baik. recommended banget buat yang mau nyari
+            kost di daerah salatiga"</div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-header">
+            <div class="review-avatar">LK</div>
+            <div>
+              <div class="review-name">L**** K*****</div>
+            </div>
+          </div>
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">"Salah satu kost yang bener bener bikin aku nyaman. Tempatnya bersih, tenang, dan
+            terawat dengan sangat baik. Fasilitasnya lengkap dan semuanya berfungsi dengan baik. Suasananya sejuk ga
+            pengap pokonya enakk bgt buat tinggal."</div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-header">
+            <div class="review-avatar">DM</div>
+            <div>
+              <div class="review-name">D**** M******</div>
+            </div>
+          </div>
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">"Kost nya sangat nyaman dan sejuk, bersih, air nya bersih dan segar dengan fasilitas
+            yang lengkap mulai dari dapur bersama, pengering pakaian jadi ga perlu khawatir baju susah kering, tempat
+            jemur baju yang luas tersedia juga disetiap depan kamar nya, ada kulkas juga, parkiran motor cukup luas,
+            bonus nya bapak ibu kos yang super baikk seperti keluarga sendiri..☺️"</div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-header">
+            <div class="review-avatar">NP</div>
+            <div>
+              <div class="review-name">N****** P****</div>
+            </div>
+          </div>
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">"Kost buntik sangat bersihh dan nyamannnnn, ada kulkas, mesin cuci pengering, dapur
+            bersama, kamar mandi dalam dan yang penting bersihhh... ibu kost dan bapak kost sangat baikk... ramahh dan
+            pengertian💜"</div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-header">
+            <div class="review-avatar">M</div>
+            <div>
+              <div class="review-name">M*****</div>
+            </div>
+          </div>
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">"Kosnya nyaman, fasilitas lengkap ada kulkas, dapur sama mesin cuci bersama, yg punya
+            baik bnget royal lagi, klo ada komplainan responnya cepet 👍👍👍"</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <strong>Kost Putri Bu Antik</strong>
+    Kumpulrejo, Kec. Argomulyo, Kota Salatiga, Jawa Tengah — Hubungi: 0852-2685-8923
+    <br><br>
+    <span style="font-size: 12px; opacity: 0.5;">© 2024-2026 Kost Putri Bu Antik. All rights reserved.</span>
+  </footer>
+
+  <script>
+    async function loadDynamicDistances() {
+      try {
+        const res = await fetch('/api/locations');
+        if (!res.ok) return;
+        const data = await res.json();
+        data.forEach(loc => {
+          const el = document.getElementById('dist-' + loc.id);
+          if (el) {
+            el.textContent = `${loc.distance} ${loc.time}`;
+          }
+        });
+      } catch (e) {
+        console.warn('Gagal memuat jarak dinamis dari server, menggunakan data fallback.', e);
+      }
+    }
+    document.addEventListener('DOMContentLoaded', loadDynamicDistances);
+  </script>
+
+  <script>
+    function closeWarn() {
+      const overlay = document.getElementById('warn-overlay');
+      overlay.classList.add('warn-hiding');
+      setTimeout(() => overlay.style.display = 'none', 350);
+    }
+
+    function closeWarnOnOverlay(e) {
+      if (e.target === document.getElementById('warn-overlay')) closeWarn();
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const overlay = document.getElementById('warn-overlay');
+      overlay.style.display = 'flex';
+      requestAnimationFrame(() => overlay.classList.add('warn-visible'));
+    });
+  </script>
 
 </body>
+
 </html>
